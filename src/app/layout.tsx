@@ -5,7 +5,6 @@ import '@payloadcms/next/css'
 import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import { importMap } from './(payload)/admin/importMap.js'
-import './globals.css'
 
 const playfair = Playfair_Display({
   variable: '--font-heading',
