@@ -4,6 +4,7 @@ export const Settings: GlobalConfig = {
   slug: 'settings',
   access: {
     read: () => true,
+    update: ({ req: { user } }) => Boolean(user),
   },
   fields: [
     {
