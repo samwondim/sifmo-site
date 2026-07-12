@@ -27,7 +27,7 @@ export async function Footer() {
               </div>
               <span className="font-bold" style={{ fontFamily: 'var(--font-heading)' }}>SIFMO Printing</span>
             </div>
-            <p className="text-white/50">Premium full-service printing since 1998.</p>
+            <p className="text-white/50">Premium full-service printing since 2026.</p>
           </div>
           <div>
             <h5 className="font-semibold mb-2" style={{ fontFamily: 'var(--font-heading)' }}>Quick Links</h5>
