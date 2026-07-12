@@ -2,7 +2,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import { buildConfig } from 'payload'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
-import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 import { Media } from './payload/collections/Media'
@@ -32,7 +32,7 @@ export default buildConfig({
   },
   sharp,
   db: isProd
-    ? vercelPostgresAdapter({
+    ? postgresAdapter({
         pool: {
           connectionString: process.env.DATABASE_URI || process.env.POSTGRES_URL || '',
         },
