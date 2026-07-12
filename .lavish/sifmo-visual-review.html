@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="sifmo">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIFMO Printing — Visual Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/daisyui.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@5.5.19/themes.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.2.4/dist/index.global.js"></script>
+  <style>
+    @layer base {
+      [data-theme="sifmo"] {
+        --color-primary: oklch(0.68 0.14 82.5);
+        --color-primary-light: oklch(0.78 0.1 82.5);
+        --color-primary-dark: oklch(0.55 0.12 82.5);
+        --color-secondary: oklch(0.22 0.02 260);
+        --color-accent: oklch(0.55 0.12 48);
+        --color-surface: oklch(0.97 0.01 85);
+        --color-surface-secondary: oklch(0.93 0.01 85);
+        --color-surface-tertiary: oklch(0.88 0.01 85);
+        --color-ink: oklch(0.18 0.02 260);
+        --color-ink-light: oklch(0.45 0.02 260);
+        --color-ink-lighter: oklch(0.65 0.01 260);
+        --font-heading: 'Playfair Display', Georgia, serif;
+        --font-body: 'Lora', Georgia, serif;
+      }
+    }
+    body {
+      font-family: var(--font-body);
+      color: var(--color-ink);
+      background: var(--color-surface);
+    }
+    h1, h2, h3, h4, h5, h6, .heading {
+      font-family: var(--font-heading);
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .review-section {
+      scroll-margin-top: 5rem;
+    }
+    .screenshot-frame {
+      border: 1px solid var(--color-surface-tertiary);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .screenshot-frame img {
+      width: 100%;
+      display: block;
+    }
+    .screenshot-header {
+      background: var(--color-surface-secondary);
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--color-surface-tertiary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .screenshot-dot {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 50%;
+    }
+    .nav-blur {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .gold-gradient {
+      background: linear-gradient(135deg, #b8952e 0%, #d4af37 40%, #c9a84c 70%, #b8952e 100%);
+    }
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+    }
+    .transition-smooth {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    :where(.grid, .flex) > * { min-width: 0; }
+    :where(p, h1, h2, h3, h4, h5, h6, li, dd, blockquote, figcaption, td, th, .badge, .label) {
+      overflow-wrap: anywhere;
+    }
+    img { max-width: 100%; height: auto; }
+    .review-checkbox:checked + label {
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+    .todo-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--color-surface-tertiary);
+    }
+    .todo-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ==================== TOP NAV ==================== -->
+<div class="sticky top-0 z-50 nav-blur bg-surface/80 border-b border-surface-secondary">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 gold-gradient rounded-md flex items-center justify-center text-xs font-bold text-[#1a1612]">S</div>
+        <span class="heading text-xl font-bold tracking-tight">SIFMO</span>
+      </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink-light">
+        <span class="text-primary">Visual Review</span>
+        <a href="#checklist" class="hover:text-ink transition-smooth">Checklist</a>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== HERO ==================== -->
+<div class="bg-surface-secondary border-b border-surface-tertiary">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20 text-center">
+    <div class="badge badge-soft badge-primary mb-4">Review v1.0</div>
+      <h1 class="text-4xl lg:text-6xl font-bold heading text-balance leading-tight max-w-full">
+        SIFMO Printing<br>
+        <span class="text-primary">Visual Review</span>
+      </h1>
+    <p class="text-ink-light text-lg mt-4 max-w-2xl mx-auto">
+      Annotate each screenshot below with what needs fixing, changing, or polishing.
+    </p>
+  </div>
+</div>
+
+<!-- ==================== SCREENSHOTS ==================== -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+
+  <!-- Homepage -->
+  <section id="screenshot-home" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">Home Page</h2>
+        <p class="text-sm text-ink-light">Hero, featured work, services preview, testimonial, footer</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com /</span>
+      </div>
+      <img src="sifmo-homepage.png" alt="SIFMO Homepage Screenshot" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="screenshot-portfolio" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">Portfolio Page</h2>
+        <p class="text-sm text-ink-light">Filterable project grid with category tags</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com / portfolio</span>
+      </div>
+      <img src="sifmo-portfolio.png" alt="SIFMO Portfolio Screenshot" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="screenshot-contact" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">Contact Page</h2>
+        <p class="text-sm text-ink-light">Contact form + business info + map</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com / contact</span>
+      </div>
+      <img src="sifmo-contact.png" alt="SIFMO Contact Screenshot" loading="lazy">
+    </div>
+  </section>
+
+  <!-- Services page -->
+  <section id="screenshot-services" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">Services Page</h2>
+        <p class="text-sm text-ink-light">Service cards with descriptions, tags, and process steps</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com / services</span>
+      </div>
+      <div class="bg-surface p-12 text-center text-ink-lighter">
+        <svg class="w-16 h-16 mx-auto mb-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <p class="text-lg">Screenshot not yet captured</p>
+        <p class="text-sm mt-1">Open /services in the browser and take a screenshot</p>
+        <button class="btn btn-primary btn-sm mt-4" onclick="alert('Run: npx -y lavish-axi browser .lavish/sifmo-services.png')">Capture Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About page -->
+  <section id="screenshot-about" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">About Page</h2>
+        <p class="text-sm text-ink-light">Company story, stats, team section</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com / about</span>
+      </div>
+      <div class="bg-surface p-12 text-center text-ink-lighter">
+        <svg class="w-16 h-16 mx-auto mb-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <p class="text-lg">Screenshot not yet captured</p>
+        <p class="text-sm mt-1">Open /about in the browser and take a screenshot</p>
+        <button class="btn btn-primary btn-sm mt-4" onclick="alert('Run: npx -y lavish-axi browser .lavish/sifmo-about.png')">Capture Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials page -->
+  <section id="screenshot-testimonials" class="review-section">
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-1 h-6 gold-gradient rounded-full"></div>
+      <div>
+        <h2 class="text-2xl font-bold heading">Testimonials Page</h2>
+        <p class="text-sm text-ink-light">Client review cards with ratings</p>
+      </div>
+    </div>
+    <div class="screenshot-frame">
+      <div class="screenshot-header">
+        <div class="screenshot-dot bg-red-400"></div>
+        <div class="screenshot-dot bg-yellow-400"></div>
+        <div class="screenshot-dot bg-green-400"></div>
+        <span class="text-xs text-ink-lighter ml-2">sifmo.com / testimonials</span>
+      </div>
+      <div class="bg-surface p-12 text-center text-ink-lighter">
+        <svg class="w-16 h-16 mx-auto mb-4 opacity-40" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <p class="text-lg">Screenshot not yet captured</p>
+        <p class="text-sm mt-1">Open /testimonials in the browser and take a screenshot</p>
+        <button class="btn btn-primary btn-sm mt-4" onclick="alert('Run: npx -y lavish-axi browser .lavish/sifmo-testimonials.png')">Capture Now</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== DESIGN SYSTEM ==================== -->
+<section id="design-system" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-surface-tertiary">
+  <div class="flex items-center gap-3 mb-2">
+    <div class="w-1 h-8 gold-gradient rounded-full"></div>
+    <h2 class="text-3xl font-bold heading text-balance">Current Design Tokens</h2>
+  </div>
+  <p class="text-ink-light mb-8">As defined in <code>globals.css</code> — matches what's live on every page.</p>
+
+  <div class="grid lg:grid-cols-2 gap-8">
+    <!-- Colors -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Color Palette</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <div class="rounded-box p-4 text-center" style="background: oklch(0.68 0.14 82.5); color: oklch(0.98 0.01 85);">
+          <div class="text-xs font-mono mb-1 opacity-80">Primary</div>
+          <div class="text-[10px] font-mono opacity-60">Gold</div>
+        </div>
+        <div class="rounded-box p-4 text-center text-white" style="background: oklch(0.22 0.02 260);">
+          <div class="text-xs font-mono mb-1 opacity-80">Secondary</div>
+          <div class="text-[10px] font-mono opacity-60">Deep Ink</div>
+        </div>
+        <div class="rounded-box p-4 text-center text-white" style="background: oklch(0.55 0.12 48);">
+          <div class="text-xs font-mono mb-1 opacity-80">Accent</div>
+          <div class="text-[10px] font-mono opacity-60">Copper</div>
+        </div>
+        <div class="rounded-box p-4 text-center" style="background: oklch(0.97 0.01 85); color: oklch(0.18 0.02 260); border: 1px solid oklch(0.88 0.01 85);">
+          <div class="text-xs font-mono mb-1 opacity-80">Surface</div>
+          <div class="text-[10px] font-mono opacity-60">Warm Paper</div>
+        </div>
+        <div class="rounded-box p-4 text-center" style="background: oklch(0.93 0.01 85); color: oklch(0.18 0.02 260);">
+          <div class="text-xs font-mono mb-1 opacity-80">Surface 2</div>
+          <div class="text-[10px] font-mono opacity-60">Light Warm</div>
+        </div>
+        <div class="rounded-box p-4 text-center" style="background: oklch(0.18 0.02 260); color: oklch(0.97 0.01 85);">
+          <div class="text-xs font-mono mb-1 opacity-80">Ink</div>
+          <div class="text-[10px] font-mono opacity-60">Text Color</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div>
+      <h3 class="text-lg font-semibold mb-4">Typography</h3>
+      <div class="space-y-4">
+        <div class="rounded-box border border-surface-tertiary p-5">
+          <div class="text-xs font-mono text-ink-lighter mb-2 uppercase tracking-wider">Headings</div>
+          <div style="font-family: 'Playfair Display', serif;">
+            <div class="text-3xl font-bold">Playfair Display</div>
+            <div class="text-lg mt-2 text-ink-light">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+            <div class="text-base text-ink-lighter mt-1">abcdefghijklmnopqrstuvwxyz 0123456789</div>
+            <div class="flex gap-3 mt-2 text-sm text-ink-lighter">
+              <span class="font-bold">Bold</span>
+              <span class="font-semibold">Semibold</span>
+              <span class="font-medium">Medium</span>
+              <span class="italic">Italic</span>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-box border border-surface-tertiary p-5">
+          <div class="text-xs font-mono text-ink-lighter mb-2 uppercase tracking-wider">Body</div>
+          <div style="font-family: 'Lora', Georgia, serif;">
+            <div class="text-2xl font-bold">Lora</div>
+            <div class="text-lg mt-2 text-ink-light">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+            <div class="text-base text-ink-lighter mt-1">abcdefghijklmnopqrstuvwxyz 0123456789</div>
+            <div class="flex gap-3 mt-2 text-sm text-ink-lighter">
+              <span class="font-bold">Bold</span>
+              <span class="font-semibold">Semibold</span>
+              <span class="font-medium">Medium</span>
+              <span class="italic">Italic</span>
+              <span class="font-normal">Regular</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== REVIEW CHECKLIST ==================== -->
+<section id="checklist" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-surface-tertiary">
+  <div class="flex items-center gap-3 mb-6">
+    <div class="w-1 h-6 gold-gradient rounded-full"></div>
+    <h2 class="text-2xl font-bold heading">Review Checklist</h2>
+  </div>
+  <p class="text-ink-light mb-6">Annotate each screenshot above, then tick off items as you verify them:</p>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="rounded-box border border-surface-tertiary p-5">
+      <h3 class="font-semibold heading mb-3">Visual & Layout</h3>
+      <div class="space-y-1">
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c1">
+          <label for="c1" class="text-sm cursor-pointer">Spacing / padding is consistent across pages</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c2">
+          <label for="c2" class="text-sm cursor-pointer">Hero typewriter animation plays correctly</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c3">
+          <label for="c3" class="text-sm cursor-pointer">Portfolio filter tabs work and animate</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c4">
+          <label for="c4" class="text-sm cursor-pointer">Service cards layout is balanced</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c5">
+          <label for="c5" class="text-sm cursor-pointer">Testimonial cards have consistent height</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c6">
+          <label for="c6" class="text-sm cursor-pointer">Contact form fields aligned and styled</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="c7">
+          <label for="c7" class="text-sm cursor-pointer">Footer contact info displays from CMS</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-box border border-surface-tertiary p-5">
+      <h3 class="font-semibold heading mb-3">Content & Data</h3>
+      <div class="space-y-1">
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d1">
+          <label for="d1" class="text-sm cursor-pointer">Projects load from Payload CMS</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d2">
+          <label for="d2" class="text-sm cursor-pointer">Services load from Payload CMS</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d3">
+          <label for="d3" class="text-sm cursor-pointer">Testimonials load from Payload CMS</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d4">
+          <label for="d4" class="text-sm cursor-pointer">Settings (contact info, stats) load from Payload CMS</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d5">
+          <label for="d5" class="text-sm cursor-pointer">Pages are dynamic (noStore) — changes appear on refresh</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d6">
+          <label for="d6" class="text-sm cursor-pointer">Payload admin panel loads without hydration errors</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="d7">
+          <label for="d7" class="text-sm cursor-pointer">No dark background bleed from admin theme</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-box border border-surface-tertiary p-5">
+      <h3 class="font-semibold heading mb-3">Responsive & Mobile</h3>
+      <div class="space-y-1">
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="r1">
+          <label for="r1" class="text-sm cursor-pointer">Header nav collapses to hamburger menu</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="r2">
+          <label for="r2" class="text-sm cursor-pointer">Project grid goes to 1 column on small screens</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="r3">
+          <label for="r3" class="text-sm cursor-pointer">Typewriter heading text wraps gracefully</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="r4">
+          <label for="r4" class="text-sm cursor-pointer">Contact form is full-width on mobile</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="r5">
+          <label for="r5" class="text-sm cursor-pointer">Touch targets are large enough (&ge; 44px)</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="rounded-box border border-surface-tertiary p-5">
+      <h3 class="font-semibold heading mb-3">Performance & Build</h3>
+      <div class="space-y-1">
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="p1">
+          <label for="p1" class="text-sm cursor-pointer">Build succeeds with no TypeScript errors</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="p2">
+          <label for="p2" class="text-sm cursor-pointer">All routes compile (ƒ = dynamic)</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="p3">
+          <label for="p3" class="text-sm cursor-pointer">No console errors in browser</label>
+        </div>
+        <div class="todo-item">
+          <input type="checkbox" class="checkbox checkbox-sm review-checkbox" id="p4">
+          <label for="p4" class="text-sm cursor-pointer">Lighthouse performance &ge; 80</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 p-5 rounded-box bg-surface-secondary text-sm text-ink-light border border-surface-tertiary">
+    <strong>How to use:</strong> Select an element on any screenshot by clicking it (opens annotation toolbar), or right-click a region to leave feedback. Check off items as you verify them.
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="border-t border-surface-tertiary py-8 text-center text-xs text-ink-lighter">
+  <p>SIFMO Printing &mdash; Visual Review &middot; Generated 2026-07-12</p>
+</footer>
+
+</body>
+</html>
