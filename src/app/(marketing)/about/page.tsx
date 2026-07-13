@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getSettings } from '@/lib/payload'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export const metadata: Metadata = {
   title: 'About',
@@ -30,21 +31,27 @@ export default async function AboutPage() {
           <div>
             <h2 className="text-2xl font-bold">More Than Just Ink on Paper</h2>
             <div className="mt-4 space-y-4 text-sm text-ink-light leading-relaxed">
-              <p>
-                SIFMO Printing was founded in 1998 with a single Heidelberg press and a commitment to
-                uncompromising quality. Twenty-eight years later, we&apos;ve grown into a full-service printing
-                house serving hundreds of businesses across the region.
-              </p>
-              <p>
-                We believe that great printing is a craft — one that demands attention to detail, deep
-                knowledge of materials, and a genuine partnership with our clients. From a small batch of
-                business cards to a complex packaging run, every project gets the same dedication.
-              </p>
-              <p>
-                Our team of 30+ craftsmen, designers, and technicians work with state-of-the-art equipment
-                including 6-color Heidelberg presses, digital HP Indigo, and a full bindery with foil
-                stamping and die-cutting capabilities.
-              </p>
+              {settings.aboutContent ? (
+                <RichText data={settings.aboutContent} />
+              ) : (
+                <>
+                  <p>
+                    SIFMO Printing was founded in 1998 with a single Heidelberg press and a commitment to
+                    uncompromising quality. Twenty-eight years later, we&apos;ve grown into a full-service printing
+                    house serving hundreds of businesses across the region.
+                  </p>
+                  <p>
+                    We believe that great printing is a craft — one that demands attention to detail, deep
+                    knowledge of materials, and a genuine partnership with our clients. From a small batch of
+                    business cards to a complex packaging run, every project gets the same dedication.
+                  </p>
+                  <p>
+                    Our team of 30+ craftsmen, designers, and technicians work with state-of-the-art equipment
+                    including 6-color Heidelberg presses, digital HP Indigo, and a full bindery with foil
+                    stamping and die-cutting capabilities.
+                  </p>
+                </>
+              )}
             </div>
           </div>
           <div className="rounded-xl bg-surface-secondary p-6 text-center">

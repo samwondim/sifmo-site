@@ -6,8 +6,11 @@ export async function Footer() {
   let phone = '(212) 555-0198'
   let email = 'hello@sifmo.com'
 
+  let siteName = 'SIFMO Printing'
+
   try {
     const settings = await getSettings()
+    siteName = settings.siteName || siteName
     address = settings.contactInfo?.address ?? address
     phone = settings.contactInfo?.phone ?? phone
     email = settings.contactInfo?.email ?? email
@@ -25,7 +28,7 @@ export async function Footer() {
                 style={{ background: 'linear-gradient(135deg, #b8952e, #d4af37)' }}>
                 S
               </div>
-              <span className="font-bold" style={{ fontFamily: 'var(--font-heading)' }}>SIFMO Printing</span>
+              <span className="font-bold" style={{ fontFamily: 'var(--font-heading)' }}>{siteName}</span>
             </div>
             <p className="text-white/50">Premium full-service printing since 2026.</p>
           </div>
@@ -57,7 +60,7 @@ export async function Footer() {
           </div>
         </div>
         <div className="border-t border-white/10 mt-8 pt-6 text-center text-xs text-white/30">
-          &copy; {new Date().getFullYear()} SIFMO Printing. All rights reserved.
+          &copy; {new Date().getFullYear()} {siteName}. All rights reserved.
         </div>
       </div>
     </footer>

@@ -4,9 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-const headingLine1 = 'Where Precision'
-const headingLine2 = 'Meets Print'
-const fullText = headingLine1 + '\n' + headingLine2
 const typeSpeed = 45
 
 function useTypewriter(text: string) {
@@ -25,7 +22,17 @@ function useTypewriter(text: string) {
   return { visibleCount: index, done }
 }
 
-export function HeroSection() {
+interface HeroSettings {
+  tagline?: string
+  heroDescription?: string
+}
+
+export function HeroSection({ settings }: { settings?: HeroSettings }) {
+  const tagline = settings?.tagline
+  const heroDescription = settings?.heroDescription
+  const headingLine1 = tagline?.split(' ').slice(0, -1).join(' ') || 'Where Precision'
+  const headingLine2 = tagline?.split(' ').slice(-1).join(' ') || 'Meets Print'
+  const fullText = headingLine1 + '\n' + headingLine2
   const { visibleCount, done } = useTypewriter(fullText)
 
   const renderChars = (start: number, end: number) =>
@@ -60,14 +67,16 @@ export function HeroSection() {
         }}
       />
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 py-20 lg:py-28 w-full">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary mb-6"
-        >
-          Est. 2026
-        </motion.div>
+        {tagline && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-primary mb-6"
+          >
+            {tagline}
+          </motion.div>
+        )}
 
         <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight min-h-[2.5em]">
           <span>{renderChars(0, line1Count)}</span>
@@ -86,8 +95,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, ease: 'easeOut', delay: 0.15 }}
           className="text-ink-light text-lg lg:text-xl mt-4 max-w-2xl leading-relaxed"
         >
-          From business cards to billboards — full-service printing with
-          uncompromising quality, fast turnaround, and a passion for the craft.
+          {heroDescription || "From business cards to billboards \u2014 full-service printing with uncompromising quality, fast turnaround, and a passion for the craft."}
         </motion.p>
 
         <motion.div
