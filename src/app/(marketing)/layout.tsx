@@ -1,5 +1,7 @@
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { SmoothScroll } from '@/components/layout/SmoothScroll'
+import { Preloader } from '@/components/sections/Preloader'
 import { getSettings } from '@/lib/payload'
 import type { Settings } from '@/payload-types'
 import '../globals.css'
@@ -18,9 +20,12 @@ export default async function MarketingLayout({
 
   return (
     <>
-      <Header settings={settings ? { siteName: settings.siteName, tagline: settings.tagline, logo: settings.logo } : undefined} />
-      <main className="flex-1">{children}</main>
-      <Footer />
+      <Preloader />
+      <SmoothScroll>
+        <Header settings={settings ? { siteName: settings.siteName, tagline: settings.tagline, logo: settings.logo } : undefined} />
+        <main className="flex-1">{children}</main>
+        <Footer />
+      </SmoothScroll>
     </>
   )
 }

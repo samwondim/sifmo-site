@@ -1,29 +1,43 @@
 import { getProjects, getServices, getSettings, getTestimonials } from '@/lib/payload'
-import { HeroSection } from '@/components/home/HeroSection'
-import { FeaturedWork } from '@/components/home/FeaturedWork'
-import { ServicesPreview } from '@/components/home/ServicesPreview'
-import { TestimonialHighlight } from '@/components/home/TestimonialHighlight'
+import { ScrollRevealInit } from '@/components/sections/ScrollRevealInit'
+import { HeroSection } from '@/components/sections/HeroSection'
+import { ServicesSection } from '@/components/sections/ServicesSection'
+import { WhyChooseUs } from '@/components/sections/WhyChooseUs'
+import { ProcessSection } from '@/components/sections/ProcessSection'
+import { PaperStockStrip } from '@/components/sections/PaperStockStrip'
+import { PortfolioSection } from '@/components/sections/PortfolioSection'
+import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
+import { QuoteFormSection } from '@/components/sections/QuoteFormSection'
 
 export default async function HomePage() {
   let settings: { tagline?: string; heroDescription?: string } | undefined
   try {
-    settings = await getSettings()
+    const s = await getSettings()
+    settings = { tagline: s.tagline, heroDescription: s.heroDescription }
   } catch {
     // fall back to defaults
   }
 
-  const [projects, services, testimonials] = await Promise.all([
-    getProjects({ limit: 3, depth: 1 }),
-    getServices({ limit: 4 }),
-    getTestimonials({ featured: true, limit: 1 }),
-  ])
+  try {
+    await Promise.all([
+      getProjects({ limit: 3, depth: 1 }),
+      getServices({ limit: 6 }),
+      getTestimonials({ featured: true, limit: 3 }),
+    ])
+  } catch {
+    // CMS not available — sections use hardcoded fallback data
+  }
 
   return (
-    <>
-      <HeroSection settings={settings ? { tagline: settings.tagline, heroDescription: settings.heroDescription } : undefined} />
-      <FeaturedWork projects={projects} />
-      <ServicesPreview services={services} />
-      <TestimonialHighlight testimonial={testimonials[0] ?? null} />
-    </>
+    <ScrollRevealInit>
+      <HeroSection settings={settings} />
+      <ServicesSection />
+      <WhyChooseUs />
+      <ProcessSection />
+      <PaperStockStrip />
+      <PortfolioSection />
+      <TestimonialsSection />
+      <QuoteFormSection />
+    </ScrollRevealInit>
   )
 }

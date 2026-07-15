@@ -1,32 +1,38 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, Lora } from 'next/font/google'
+import { Fraunces, Inter, IBM_Plex_Mono } from 'next/font/google'
 import config from '@payload-config'
 import '@payloadcms/next/css'
+import './globals.css'
 import type { ServerFunctionClient } from 'payload'
 import { handleServerFunctions, RootLayout } from '@payloadcms/next/layouts'
 import { importMap } from './(payload)/admin/importMap.js'
 
-const playfair = Playfair_Display({
+const fraunces = Fraunces({
   variable: '--font-heading',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '600', '700', '900'],
   style: ['normal', 'italic'],
 })
 
-const lora = Lora({
+const inter = Inter({
   variable: '--font-body',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: ['300', '400', '500', '600', '700'],
+})
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: '--font-mono',
+  subsets: ['latin'],
+  weight: ['400', '500'],
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'SIFMO Printing | Full-Service Printing Press',
-    template: '%s | SIFMO Printing',
+    default: 'SVO Printing | Full-Service Printing Press',
+    template: '%s | SVO Printing',
   },
   description:
-    'Premium full-service printing since 1998. Business cards, brochures, packaging, banners, and more.',
+    'Premium full-service printing — business cards, brochures, packaging, banners, and custom stationery. Fast turnaround, premium stock, in-house design support.',
 }
 
 const serverFunction: ServerFunctionClient = async function (args) {
@@ -44,7 +50,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
       config={config}
       importMap={importMap}
       serverFunction={serverFunction}
-      htmlProps={{ className: `${playfair.variable} ${lora.variable}` }}
+      htmlProps={{ className: `${fraunces.variable} ${inter.variable} ${ibmPlexMono.variable}` }}
     >
       {children}
     </RootLayout>

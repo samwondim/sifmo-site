@@ -1,32 +1,83 @@
 @import "tailwindcss";
 
+@keyframes blobFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  25% { transform: translate3d(12px, -18px, 0) scale(1.03); }
+  50% { transform: translate3d(-8px, 14px, 0) scale(0.97); }
+  75% { transform: translate3d(18px, 8px, 0) scale(1.01); }
+}
+
 @theme inline {
-  --color-primary: oklch(0.68 0.14 82.5);
-  --color-primary-light: oklch(0.78 0.1 82.5);
-  --color-primary-dark: oklch(0.55 0.12 82.5);
-  --color-secondary: oklch(0.22 0.02 260);
-  --color-accent: oklch(0.55 0.12 48);
-  --color-surface: oklch(0.97 0.01 85);
-  --color-surface-secondary: oklch(0.93 0.01 85);
-  --color-surface-tertiary: oklch(0.88 0.01 85);
-  --color-ink: oklch(0.18 0.02 260);
-  --color-ink-light: oklch(0.45 0.02 260);
-  --color-ink-lighter: oklch(0.65 0.01 260);
+  --color-ink-black: #12181A;
+  --color-paper: #F6F4EF;
+  --color-paper-secondary: #EFECE6;
+  --color-deep-teal: #155158;
+  --color-mid-teal: #2E8C86;
+  --color-mid-blue: #2467A6;
+  --color-hairline: #DAD4C8;
+  --color-accent-start: #2E8C86;
+  --color-accent-end: #2467A6;
 }
 
 @layer base {
   html {
     font-size: 16px;
+    scroll-behavior: smooth;
   }
   html, html[data-theme='dark'] {
-    background: var(--color-surface);
+    background: var(--color-paper);
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    color: var(--color-ink-black);
+    letter-spacing: -0.02em;
   }
   body {
     font-family: var(--font-body);
-    color: var(--color-ink);
-    background: var(--color-surface);
+    color: var(--color-ink-black);
+    background: var(--color-paper);
+  }
+  ::selection {
+    background: var(--color-mid-teal);
+    color: white;
+  }
+}
+
+@layer utilities {
+  .halftone-bg {
+    background-image: radial-gradient(circle, #155158 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .halftone-bg-subtle {
+    background-image: radial-gradient(circle, #12181A 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .reg-mark {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ccircle cx='8' cy='8' r='3' fill='none' stroke='%23DAD4C8' stroke-width='1'/%3E%3Cline x1='8' y1='0' x2='8' y2='5' stroke='%23DAD4C8' stroke-width='0.5'/%3E%3Cline x1='8' y1='11' x2='8' y2='16' stroke='%23DAD4C8' stroke-width='0.5'/%3E%3Cline x1='0' y1='8' x2='5' y2='8' stroke='%23DAD4C8' stroke-width='0.5'/%3E%3Cline x1='11' y1='8' x2='16' y2='8' stroke='%23DAD4C8' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--color-mid-teal), var(--color-mid-blue));
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-mid-teal), var(--color-mid-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-mid-teal)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-paper)];
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
