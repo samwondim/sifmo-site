@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState, createContext, useContext, type ReactNode } from 'react'
+import { usePathname } from 'next/navigation'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -17,6 +18,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null)
   const initedRef = useRef(false)
   const [pct, setPct] = useState(0)
+  const pathname = usePathname()
 
   useEffect(() => {
     if (initedRef.current) return
@@ -33,6 +35,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         easing: (t: number) => 1 - Math.pow(1 - t, 3),
         orientation: 'vertical',
         smoothWheel: true,
+        stopInertiaOnNavigate: true,
       })
 
       lenisRef.current = lenis
@@ -66,6 +69,16 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
       initedRef.current = false
     }
   }, [])
+
+  useEffect(() => {
+    const lenis = lenisRef.current
+    if (!lenis) return
+    lenis.stop()
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0)
+      lenis.start()
+    })
+  }, [pathname])
 
   const showBar = pct > 0 && pct < 100
 
